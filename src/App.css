@@ -1,0 +1,63 @@
+
+div.play-table {
+  display: inline-flex;
+  font-family: "ヒラギノ角ゴ", "Hiragino Kaku Gothic ProN", "游ゴシック", YuGothic, "メイリオ", Meiryo, sans-serif;
+  font-size: 200%;
+  width: 95%;
+  margin: 1em;
+  color: #eee;
+  background-color: #274;
+}
+
+.play-table div.card {
+  display: inline-block;
+  width: 8rem;
+  height: 12rem;
+  margin: 1rem;
+  cursor: pointer;
+}
+
+.play-table div.card div {
+  position: absolute;
+  width: 7rem;
+  height: 11rem;
+  font-size: 1.5em;
+  text-align: center;
+  line-height: 11rem;
+  color: #000;
+  background-color: #fff;
+  border: 8px solid #fff;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+.play-table div.card div.front span {
+  position: absolute;
+  font-size: 0.4em;
+  width: auto;
+  line-height: 1em;
+  left: 0;
+  top: 0;
+}
+
+.play-table div.card div.front span.red {
+  color: #a00;
+}
+
+.play-table div.card div.front span.middle {
+  line-height: unset;
+  font-size: 1em;
+  width: 100%;
+}
+
+.play-table div.card div.front span.bottom-right {
+  left: auto;
+  top: auto;
+  right: 0;
+  bottom: 0;
+  transform: rotate(180deg);
+}
+
+.play-table div.card div.back {
+  background: #36c;
+}
