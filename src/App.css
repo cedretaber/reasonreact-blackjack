@@ -59,5 +59,66 @@ div.play-table {
 }
 
 .play-table div.card div.back {
-  background: #36c;
+  background-color: #36c;
+  background-image: linear-gradient(45deg, #69e, 25%, transparent 25%, transparent 75%, #69e 75%, #69e), linear-gradient(-45deg, #69e, 25%, transparent 25%, transparent 75%, #69e 75%, #69e);
+  background-size: 0.4em 0.4em;
+}
+
+.button-table {
+  display: inline-flex;
+  padding-left: 2em;
+}
+
+.button-table button {
+  font-size: 200%;
+  display: inline-block;
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+  background: #fff;
+  color: #333;
+  border: solid 1px #333;
+  border-radius: 0.1rem;
+  cursor: pointer;
+}
+
+.button-table button.disabled {
+  background-color: #ddd;
+  border: solid 1px #999;
+  color: #999;
+}
+
+.result-table {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.result-table .result {
+  font-size: 1000%;
+  font-weight: bold;
+  text-shadow: 2px 2px 1px #333, -2px 2px 1px #333, 2px -2px 1px #333, -2px -2px 1px #333;
+}
+
+.result-table .result.win {
+  color: #c33;
+}
+
+.result-table .result.lose {
+  color: #33c;
+}
+
+.result-table button {
+  font-size: 200%;
+  display: inline-block;
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+  border: solid 1px #333;
+  border-radius: 0.2rem;
 }

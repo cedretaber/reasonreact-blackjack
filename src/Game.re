@@ -8,7 +8,8 @@ type mark
 type cards = list((int, mark));
 
 type action
-  = Hit
+  = NoAction
+  | Hit
   | Stand;
 
 type state = {
@@ -76,16 +77,16 @@ let init = () => {
   {
     player: [draw_card(), draw_card()],
     dealer: [draw_card(), draw_card()],
-    last_action: Hit
+    last_action: NoAction
   }
 };
 
 let next = (action, {player, dealer, last_action}) => {
   let dealer' = will_dealer_draw(dealer) ? [draw_card(), ...dealer] : dealer;
   let (player', last_action') = switch (last_action, action) {
-  | (Stand, _)
-  | (Hit, Stand) => (player, Stand)
-  | (Hit, Hit) => ([draw_card(), ...player], Hit)
+  | (_, Stand | NoAction)
+  | (Stand, Hit) => (player, Stand)
+  | (_, Hit) => ([draw_card(), ...player], Hit)
   };
 
   let state = {
