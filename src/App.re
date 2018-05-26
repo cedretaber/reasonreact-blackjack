@@ -1,7 +1,5 @@
 [%bs.raw {|require('./app.css')|}];
 
-[@bs.module] external logo : string = "./logo.svg";
-
 module RR = ReasonReact;
 let s = RR.string;
 
