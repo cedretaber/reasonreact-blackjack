@@ -70,16 +70,16 @@ let make = _children => {
     let {Game.player, dealer, last_action} = Game.get_state(self.state);
     let player_cards = show_cards(player);
     let dealer_cards = switch last_action {
-      | Game.NoAction =>
-          let cards = show_cards(dealer);
-          let hided_cards =
-            <div className="card">
-              <div className="back" />
-            </div>;
-          cards[0] = hided_cards;
-          cards
-      | _ => show_cards(dealer)
-      };
+    | Game.NoAction =>
+        let cards = show_cards(dealer);
+        let hided_cards =
+          <div className="card">
+            <div className="back" />
+          </div>;
+        cards[0] = hided_cards;
+        cards
+    | _ => show_cards(dealer)
+    };
     let panel = switch self.state {
     | Game.Playing({last_action: Game.Stand}) =>
       <div className="button-table">
