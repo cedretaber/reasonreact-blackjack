@@ -27,19 +27,17 @@ let render_card = (number, mark) => {
   </div>
 };
 
-let show_cards = cards => {
-  let cards' =
-    cards
-    |> List.rev
-    |> List.map(fun
-    | (1, mark) => render_card("A", mark)
-    | (11, mark) => render_card("J", mark)
-    | (12, mark) => render_card("Q", mark)
-    | (13, mark) => render_card("K", mark)
-    | (n, mark) => render_card(string_of_int(n), mark)
-    );
-  Array.of_list(cards')
-};
+let show_cards = cards =>
+  cards
+  |> List.rev
+  |> List.map(fun
+  | (1, mark) => render_card("A", mark)
+  | (11, mark) => render_card("J", mark)
+  | (12, mark) => render_card("Q", mark)
+  | (13, mark) => render_card("K", mark)
+  | (n, mark) => render_card(string_of_int(n), mark)
+  )
+  |> Array.of_list;
 
 let render_cards_table = cards =>
   RR.createDomElement("div", ~props={"className": "play-table"}, cards);
