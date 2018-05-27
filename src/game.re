@@ -1,33 +1,33 @@
-
-type mark
-  = Spade
+type mark =
+  | Spade
   | Club
   | Heart
   | Diam;
 
 type cards = list((int, mark));
 
-type action
-  = NoAction
+type action =
+  | NoAction
   | Hit
   | Stand;
 
 type state = {
   player: cards,
   dealer: cards,
-  last_action: action
+  last_action: action,
 };
 
-type status
-  = Playing(state)
+type status =
+  | Playing(state)
   | Win(state)
   | Lose(state);
 
-let get_state = status => switch status {
-| Playing(state) => state
-| Win(state) => state
-| Lose(state) => state
-};
+let get_state = status =>
+  switch (status) {
+  | Playing(state) => state
+  | Win(state) => state
+  | Lose(state) => state
+  };
 
 exception UnexpectedRandomNumber(int);
 
@@ -45,27 +45,32 @@ let draw_card = () => {
     | 3 => Diam
     | n => raise(UnexpectedRandomNumber(n))
     };
-  (number, mark)
+  (number, mark);
 };
 
 let sum_cards = (cards: cards) => {
   let cards = List.map(((n, _)) => n, cards);
 
-  let (sum, ac) = List.fold_left((acc, n) =>
-    switch acc {
-    | (s, a) when n == 1 => (s + 1, a + 1)
-    | (s, a) when n == 11 || n == 12 || n == 13 => (s + 10, a)
-    | (s, a) => (s + n, a)
-    }, (0, 0), cards);
+  let (sum, ac) =
+    List.fold_left(
+      (acc, n) =>
+        switch (acc) {
+        | (s, a) when n == 1 => (s + 1, a + 1)
+        | (s, a) when n == 11 || n == 12 || n == 13 => (s + 10, a)
+        | (s, a) => (s + n, a)
+        },
+      (0, 0),
+      cards,
+    );
 
   let rec ret = (sum, ac) =>
-    switch ac {
+    switch (ac) {
     | 0 => sum
     | _ when sum + 10 > 21 => sum
     | _ => ret(sum + 10, ac - 1)
     };
 
-  ret(sum, ac)
+  ret(sum, ac);
 };
 
 let is_bust = cards => sum_cards(cards) > 21;
@@ -77,31 +82,34 @@ let init = () => {
   {
     player: [draw_card(), draw_card()],
     dealer: [draw_card(), draw_card()],
-    last_action: NoAction
-  }
+    last_action: NoAction,
+  };
 };
 
 let rec next = (action, {player, dealer, last_action}) => {
-  let (player, last_action) = switch (last_action, action) {
-  | (_, Stand | NoAction)
-  | (Stand, Hit) => (player, Stand)
-  | (_, Hit) => ([draw_card(), ...player], Hit)
-  };
+  let (player, last_action) =
+    switch (last_action, action) {
+    | (_, Stand | NoAction)
+    | (Stand, Hit) => (player, Stand)
+    | (_, Hit) => ([draw_card(), ...player], Hit)
+    };
 
   if (is_bust(player)) {
-    let state = { player, dealer, last_action };
-    Lose(state)
+    let state = {player, dealer, last_action};
+    Lose(state);
   } else {
-    let dealer = will_dealer_draw(dealer) ? [draw_card(), ...dealer] : dealer;
-    let state = { player, dealer, last_action };
+    let dealer =
+      will_dealer_draw(dealer) ? [draw_card(), ...dealer] : dealer;
+    let state = {player, dealer, last_action};
 
     switch (is_bust(dealer), will_dealer_draw(dealer), last_action) {
     | (true, _, _) => Win(state)
     | (_, _, Hit) => Playing(state)
     | (_, true, Stand) => next(Stand, state)
-    | (_, false, Stand) when sum_cards(player) > sum_cards(dealer) => Win(state)
+    | (_, false, Stand) when sum_cards(player) > sum_cards(dealer) =>
+      Win(state)
     | (_, false, Stand) => Lose(state)
     | _ => Playing(state)
-    }
-  }
-}
+    };
+  };
+};
