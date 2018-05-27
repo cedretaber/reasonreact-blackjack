@@ -1,10 +1,22 @@
 
+div.table-wrapper {
+  margin: 1em;
+  padding: 0.5em;
+  border: 1px solid #000;
+}
+
+div.table-wrapper span.cast-label {
+  margin: 0.5em 0.5em 0.5em;
+  padding-left: 0.5em;
+  font-size: 150%;
+  border-left: 0.2em solid #000;
+}
+
 div.play-table {
   display: inline-flex;
   font-family: "ヒラギノ角ゴ", "Hiragino Kaku Gothic ProN", "游ゴシック", YuGothic, "メイリオ", Meiryo, sans-serif;
   font-size: 200%;
-  width: 95%;
-  margin: 1em;
+  width: 100%;
   color: #eee;
   background-color: #274;
 }

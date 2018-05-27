@@ -111,8 +111,12 @@ let make = _children => {
       </div>
     };
     <div>
-      <div>
+      <div className="table-wrapper">
         (render_cards_table(dealer_cards))
+        <span className="cast-label">(s("DEALER"))</span>
+      </div>
+      <div className="table-wrapper">
+        <span className="cast-label">(s("PLAYER"))</span>
         (render_cards_table(player_cards))
       </div>
       (panel)
