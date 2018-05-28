@@ -22,12 +22,23 @@ type status =
   | Win(state)
   | Lose(state);
 
-let get_state = status =>
-  switch (status) {
-  | Playing(state) => state
-  | Win(state) => state
-  | Lose(state) => state
-  };
+let get_player =
+  fun
+  | Playing({player}) => player
+  | Win({player}) => player
+  | Lose({player}) => player;
+
+let get_dealer =
+  fun
+  | Playing({dealer}) => dealer
+  | Win({dealer}) => dealer
+  | Lose({dealer}) => dealer;
+
+let get_last_action =
+  fun
+  | Playing({last_action}) => last_action
+  | Win({last_action}) => last_action
+  | Lose({last_action}) => last_action;
 
 exception UnexpectedRandomNumber(int);
 

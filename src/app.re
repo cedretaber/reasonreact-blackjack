@@ -74,7 +74,9 @@ let make = _children => {
   initialState,
   reducer,
   render: self => {
-    let {Game.player, dealer, last_action} = Game.get_state(self.state);
+    let player = Game.get_player(self.state);
+    let dealer = Game.get_dealer(self.state);
+    let last_action = Game.get_last_action(self.state);
     let player_cards = show_cards(player);
     let dealer_cards =
       switch (last_action) {
@@ -88,7 +90,7 @@ let make = _children => {
       };
     let panel =
       switch (self.state) {
-      | Game.Playing({last_action: Game.Stand}) =>
+      | Game.Playing(_) when Game.get_last_action(self.state) == Game.Stand =>
         <div className="button-table">
           <button className="disabled" disabled=true> (s("Hit")) </button>
           <button onClick=(_ => self.send(Stand))> (s("Stand")) </button>
