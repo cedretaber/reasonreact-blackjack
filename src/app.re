@@ -3,8 +3,8 @@
 module RR = ReasonReact;
 let s = RR.string;
 
-let mark_to_str = str =>
-  switch (str) {
+let mark_to_str = mark =>
+  switch (mark) {
   | Game.Spade => {js|♠|js}
   | Game.Club => {js|♣|js}
   | Game.Heart => {js|♥|js}
